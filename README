@@ -1,0 +1,24 @@
+This is a suite of scrapers which return article URLs which will be used to feed into the MediaCloud system.
+
+We are focusing on the following organizations:
+ - New York Times
+ - Chicago Tribune
+ - Washington Post
+ - LA Times
+
+
+The scrapers use a consistent API which takes in:
+ - A start date
+ - An end date
+
+
+And returns (in XML format):
+ - Article URL for each article in that date range
+
+
+==== RETURN XML STRUCTURE ====
+<articles>
+	<article>
+		<url></url>
+	</article>
+</articles>
