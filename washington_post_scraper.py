@@ -1,15 +1,16 @@
 # For processing HTML
 from BeautifulSoup import BeautifulSoup
 
-# Fetch the Tribune's Advanced Search results for 'the.' urllib allows passing of HTML data
+# Fetch the Post's Advanced Search results for 'the.' urllib allows passing of HTML data
+# The Post uses the Lucene Java search library to construct URLs
 import urllib
 import urllib2
 
 user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
 
 data = {
-	'Query': 'the',
-	'date': '10/01/2011-10/20/2011',
+	'st': 'the',
+	'sd': '10/01/2011-10/20/2011',
 	'target': 'adv_article',
 	'srchType': 'advSearch',
 	'range': 'cust'
@@ -17,7 +18,7 @@ data = {
 headers = { 'User-Agent' : user_agent }
 url_values = urllib.urlencode(data)
 
-url = 'http://www.chicagotribune.com/search/dispatcher.front'
+url = 'http://www.washingtonpost.com/newssearch/search.html'
 full_url = url + '?' + url_values
 data = urllib2.urlopen(full_url)
 print(full_url)

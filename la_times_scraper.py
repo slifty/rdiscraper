@@ -1,7 +1,7 @@
 # For processing HTML
 from BeautifulSoup import BeautifulSoup
 
-# Fetch the Tribune's Advanced Search results for 'the.' urllib allows passing of HTML data
+# Fetch the LA Time's Advanced Search results for 'the.' urllib allows passing of HTML data
 import urllib
 import urllib2
 
@@ -17,13 +17,13 @@ data = {
 headers = { 'User-Agent' : user_agent }
 url_values = urllib.urlencode(data)
 
-url = 'http://www.chicagotribune.com/search/dispatcher.front'
+url = 'http://www.latimes.com/search/dispatcher.front'
 full_url = url + '?' + url_values
 data = urllib2.urlopen(full_url)
 print(full_url)
 
 # Get access to the HTML we're looking to parse
-f = urllib2.urlopen(data)
+f = urllib2.urlopen(url, data)
 html_data = f.read()
 
 # Now we have the HTML string. Let's make soup
