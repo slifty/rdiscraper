@@ -1,24 +1,28 @@
 # For processing HTML
 from BeautifulSoup import BeautifulSoup
 
-# Fetch the Post's Advanced Search results for 'the.' urllib allows passing of HTML data
-# The Post uses the Lucene Java search library to construct URLs
+# Fetch the Times' Advanced Search results for 'the.' urllib allows passing of HTML data
+# The Times has several searches, including a Beta, an Archive from 1851-1980, and an archive since 1981
 import urllib
 import urllib2
 
 user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
 
 data = {
-	'st': 'the',
-	'sd': '10/01/2011-10/20/2011',
-	'target': 'adv_article',
-	'dpp': '10',
-	'df': 'Custom+Range'
+	'query': 'the',
+	'mon1': '01',
+	'day1': '01',
+	'year1': '2010',
+	'mon2': '11',
+	'day2': '16',
+	'year2': '2011',
+	'daterange': 'period'
 }
+
 headers = { 'User-Agent' : user_agent }
 url_values = urllib.urlencode(data)
 
-url = 'http://www.washingtonpost.com/newssearch/search.html'
+url = 'http://query.nytimes.com/search/query'
 full_url = url + '?' + url_values
 data = urllib2.urlopen(full_url)
 print(full_url)
@@ -48,6 +52,7 @@ for result_ul in result_uls:
 			urls.append(result_a['href'])
 			
 ## NEXT STEPS
+# these results include non-NYT content, such as AP
 # build in paging to go through multiple pages of search results (reconstruct advacned search URL
 # plug it into mediacloud via an API wrapper http://webpy.org/
 # The urllib module has been split into parts and renamed in Python 3.0 to urllib.request, urllib.parse, and urllib.error. 
