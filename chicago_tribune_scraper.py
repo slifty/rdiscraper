@@ -14,6 +14,7 @@ def fetch_page(date, page):
 		'target': 'adv_article',
 		'date': date,
 		'range': 'cust',
+		'srchType': 'advSearch',
 		'facet': '',
 		'page': page
 	}

@@ -13,21 +13,28 @@ def fetch_page(date, page):
 	user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
 	# unique
 	query_args = {
-		'st': 'the',
-		'sd': current_date,
-		'dpp': '10',
-		'df': 'Custom+Range',
-		'target': 'adv_article'
+		'QryTxt': 'bruins',
+		'st': 'advanced',
+		'datetype': '6',
+		'frommonth': '01',
+		'fromday': '01',
+		'fromyear': '1987',
+		'tomonth': '01',
+		'today': '12',
+		'toyear': '1987',
+		'num': '25',
+		'sortby': 'CHRON',
+		'Sect': 'ALL'
 	}
 	headers = { 'User-Agent' : user_agent }
 	# Turns the array into query arguments for the URL
 	url_args = urllib.urlencode(query_args)
 	# unique
-	base_url = 'http://www.washingtonpost.com/newssearch/search.html'
+	base_url = 'http://pqasb.pqarchiver.com/washingtonpost/results.html'
 	full_url = base_url + '?' + url_args
 	page_handle = urllib2.urlopen(full_url)
-	# print(full_url)
-	# print(data)
+	print(full_url)
+	# print(query_args)
 	# sys.exit
 	
 	# Get access to the HTML we're looking to parse
@@ -54,7 +61,7 @@ def get_links(soup):
 	return urls
 
 current_page_number = 0
-current_date = '11/01/2011-11/08/2011'
+current_date = '0'
 all_urls = []
 more_pages = True
 while more_pages:

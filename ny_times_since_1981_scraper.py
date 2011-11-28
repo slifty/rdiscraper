@@ -13,14 +13,17 @@ def fetch_page(date, page):
 	user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
 	# unique
 	query_args = {
-		'Query': 'the',
-		'mon1': '01',
-		'day1': '01',
-		'year1': '2010',
-		'mon2': '11',
-		'day2': '16',
-		'year2': '2011',
-		'daterange': 'period'
+		'Query': 'redskins',
+		'mon1': start_month,
+		'day1': start_day,
+		'year1': start_year,
+		'mon2': end_month,
+		'day2': end_day,
+		'year2': end_year,
+		'daterange': 'period',
+		# or change this to results_loop
+		'frow': 0,
+		'n': results_per_page
 		}
 		
 	headers = { 'User-Agent' : user_agent }
@@ -30,8 +33,7 @@ def fetch_page(date, page):
 	base_url = 'http://query.nytimes.com/search/alternate/query'
 	full_url = base_url + '?' + url_args
 	page_handle = urllib2.urlopen(full_url)
-	# print(full_url)
-	# print(data)
+	print(full_url)
 	
 	# Get access to the HTML we're looking to parse
 	html_data = page_handle.read()
@@ -60,10 +62,27 @@ def get_links(soup):
 	return urls
 
 current_page_number = 0
-current_date = '11/01/2011-11/08/2011'
+start_month = '01'
+start_day = '01'
+start_year = '2001'
+end_month = '01'
+end_day = '01'
+end_year = '2002'
+results_per_page = '50'
+
+# need to define this
+current_date = 0
+
+# need to loop this?
+# results_loop = '0' + results_per_page
+
 all_urls = []
+
+
 more_pages = True
 while more_pages:
+	# page contains Next >>
+	# "Next chr(175)"
 	page = fetch_page(current_date, current_page_number)
 	page_links = get_links(page)
 	if len(page_links)==0:
@@ -71,7 +90,7 @@ while more_pages:
 	else:
 		all_urls = all_urls + page_links
 		current_page_number = current_page_number + 1
-# print all_urls
+print all_urls
 
 ## NEXT STEPS
 # plug it into mediacloud via an API wrapper http://webpy.org/
