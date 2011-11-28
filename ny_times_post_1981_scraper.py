@@ -22,7 +22,7 @@ def fetch_page(date, page):
 		'year2': end_year,
 		'daterange': 'period',
 		# or change this to results_loop
-		'frow': 0,
+		'frow': page * results_per_page,
 		'n': results_per_page
 		}
 		
